@@ -11,7 +11,7 @@ namespace AtarashiiMono.Framework.XNA
 	using Microsoft.Xna.Framework;
 	using Microsoft.Xna.Framework.Graphics;
 
-	class AmSpriteBatch : SpriteBatch
+	public class AmSpriteBatch : SpriteBatch
 	{
 		// I didn't want to implement a full matrix system because I only need translations for right now.
 
@@ -20,7 +20,7 @@ namespace AtarashiiMono.Framework.XNA
 
 		public AmSpriteBatch(GraphicsDevice graphicsDevice) : base(graphicsDevice)
 		{
-			Matrix mat = new Matrix();
+			
 			
 		}
 
