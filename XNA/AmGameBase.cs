@@ -1,4 +1,5 @@
-﻿using AtarashiiMono.Framework.XNA;
+﻿using System.ComponentModel;
+using AtarashiiMono.Framework.XNA;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -9,6 +10,8 @@ namespace AtarashiiMono.Framework.XNA
 	/// </summary>
 	public class AmGameBase : Game
 	{
+		public static AmGameBase Instance;
+
 		public AmGame game;
 		public GraphicsDeviceManager graphics;
 		public AmSpriteBatch spriteBatch;
@@ -16,6 +19,7 @@ namespace AtarashiiMono.Framework.XNA
 		
 		public AmGameBase()
 		{
+			Instance = this;
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 			IsMouseVisible = true;

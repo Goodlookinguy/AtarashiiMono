@@ -15,7 +15,7 @@ namespace AtarashiiMono.Framework.XNA
 	{
 		// I didn't want to implement a full matrix system because I only need translations for right now.
 
-		private int[] _translation = new int[32];
+		private float[] _translation = new float[64];
 		private int _translationIndex = 0;
 
 		public AmSpriteBatch(GraphicsDevice graphicsDevice) : base(graphicsDevice)
@@ -29,8 +29,8 @@ namespace AtarashiiMono.Framework.XNA
 			Draw(
 				image.Texture,
 				new Rectangle(
-					_translation[_translationIndex] + (int)x,
-					_translation[_translationIndex + 1] + (int)y,
+					(int)_translation[_translationIndex] + (int)x,
+					(int)_translation[_translationIndex + 1] + (int)y,
 					image.Width, image.Height),
 				new Rectangle(image.SubX, image.SubY, image.Width, image.Height),
 				Color.White
@@ -55,8 +55,8 @@ namespace AtarashiiMono.Framework.XNA
 			Draw(
 				image.Texture,
 				new Rectangle(
-					_translation[_translationIndex] + (int)x,
-					_translation[_translationIndex + 1] + (int)y,
+					(int)_translation[_translationIndex] + (int)x,
+					(int)_translation[_translationIndex + 1] + (int)y,
 					(int)(image.Width * scaleX), (int)(image.Height * scaleY)),
 				new Rectangle(image.SubX, image.SubY, image.Width, image.Height),
 				Color.White
@@ -77,11 +77,12 @@ namespace AtarashiiMono.Framework.XNA
 			SpriteEffects effects,
             float layerDepth)
 			 */
-			/*Draw(
+			/*
+			Draw(
 				image.Texture,
 				new Rectangle(
-					_translation[_translationIndex] + (int)x,
-					_translation[_translationIndex + 1] + (int)y,
+					(int)_translation[_translationIndex] + (int)x,
+					(int)_translation[_translationIndex + 1] + (int)y,
 					image.Width, image.Height),
 				new Rectangle(image.SubX, image.SubY, image.Width, image.Height),
 				Color.White,
@@ -90,6 +91,31 @@ namespace AtarashiiMono.Framework.XNA
 				SpriteEffects.None,
 				0.0f
 			);*/
+			/*
+			 * Texture2D texture,
+			 * Vector2 position,
+			 * Rectangle? sourceRectangle,
+			 * Color color,
+			 * float rotation,
+			 * Vector2 origin,
+			 * float scale,
+			 * SpriteEffects effects,
+			 * float layerDepth);
+			 */
+			var position = new Vector2((int) _translation[_translationIndex] + (int) x,
+									   (int) _translation[_translationIndex] + (int) y);
+			var origin = new Vector2(image.Width / 2, image.Height / 2);
+
+			Draw(image.Texture,
+				position,
+				new Rectangle(image.SubX, image.SubY, image.Width, image.Height),
+				Color.White,
+				(float)(rotation * AmMath.Deg2Rad),
+				origin,
+				1.0f,
+				SpriteEffects.None,
+				0.0f
+			);
 			//this.Draw();
 		}
 
@@ -338,7 +364,7 @@ namespace AtarashiiMono.Framework.XNA
 				CreateThePixel();
 
 			// Simply use the function already there
-			var rect2 = new Rectangle(rect.X + _translation[_translationIndex], rect.Y + _translation[_translationIndex + 1], rect.Width, rect.Height);
+			var rect2 = new Rectangle(rect.X + (int)_translation[_translationIndex], rect.Y + (int)_translation[_translationIndex + 1], rect.Width, rect.Height);
 			Draw(_pixel, rect2, color);
 		}
 
@@ -355,7 +381,7 @@ namespace AtarashiiMono.Framework.XNA
 			if (_pixel == null)
 				CreateThePixel();
 
-			var rect2 = new Rectangle(rect.X + _translation[_translationIndex], rect.Y + _translation[_translationIndex + 1], rect.Width, rect.Height);
+			var rect2 = new Rectangle(rect.X + (int)_translation[_translationIndex], rect.Y + (int)_translation[_translationIndex + 1], rect.Width, rect.Height);
 			Draw(_pixel, rect2, null, color, angle, Vector2.Zero, SpriteEffects.None, 0);
 		}
 
