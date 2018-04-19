@@ -108,5 +108,63 @@ namespace AtarashiiMono.Framework
 		{
 			return vec.ClampBetween(new Vector2(rect.X, rect.Y), new Vector2(rect.X + rect.Width, rect.Y + rect.Height));
 		}
+
+		public static int Sign(long number)
+		{
+			if (number < 0) return -1;
+			return 1;
+		}
+
+		public static int Sign(int number)
+		{
+			if (number < 0) return -1;
+			return 1;
+		}
+
+		public static int Sign(short number)
+		{
+			if (number < 0) return -1;
+			return 1;
+		}
+
+		public static int Sign(sbyte number)
+		{
+			if (number < 0) return -1;
+			return 1;
+		}
+
+		public static int Sign(double number)
+		{
+			if (number < 0.0) return -1;
+			return 1;
+		}
+
+		public static int Sign(float number)
+		{
+			if (number < 0.0f) return -1;
+			return 1;
+		}
+
+		public static float Round(float number)
+		{
+			return (int) (number + 0.5f * Sign(number));
+		}
+
+		public static double Round(double number)
+		{
+			return (int)(number + 0.5f * Sign(number));
+		}
+
+		public static float Round(float number, int places)
+		{
+			int x = (int) Math.Pow(10.0, places);
+			return Round(number * x) / x;
+		}
+
+		public static double Round(double number, int places)
+		{
+			int x = (int)Math.Pow(10.0, places);
+			return Round(number * x) / x;
+		}
 	}
 }
