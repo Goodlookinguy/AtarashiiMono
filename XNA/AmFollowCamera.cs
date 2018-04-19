@@ -1,49 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace AtarashiiMono.Framework.XNA
 {
-	public class AmEntity
-	{
-		public Vector2 Location;
-		public SortedDictionary<string,Vector2> HotSpots = new SortedDictionary<string, Vector2>();
-
-		public AmEntity()
-		{
-			HotSpots["Am/Center"] = new Vector2(0, 0);
-		}
-
-		public Vector2 GetHotSpotLocation(string hotSpotName)
-		{
-			return Location + HotSpots[hotSpotName];
-		}
-	}
-
-	public abstract class AmCamera : IAmDrawable
-	{
-		public AmEntity Target = null;
-		public Rectangle Bounds = new Rectangle(0, 0, 640, 480);
-
-		public abstract void Update(GameTime gameTime);
-		public abstract void Draw(GameTime gameTime, AmSpriteBatch graphics, int x = 0, int y = 0);
-
-		public void StartCamera(AmSpriteBatch graphics)
-		{
-			graphics.PushMatrix();
-		}
-
-		public void StopCamera(AmSpriteBatch graphics)
-		{
-			graphics.PopMatrix();
-		}
-
-		
-	}
-
 	public class AmFollowCamera : AmCamera
 	{
 		public override void Update(GameTime gameTime)

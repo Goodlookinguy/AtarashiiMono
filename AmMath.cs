@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using AtarashiiMono.Framework.XNA.Extensions;
+using Microsoft.Xna.Framework;
+using OpenGL;
 
 namespace AtarashiiMono.Framework
 {
@@ -75,6 +78,35 @@ namespace AtarashiiMono.Framework
 		public static double Acosd(double degrees)
 		{
 			return Math.Acos(degrees * Rad2Deg);
+		}
+
+		public static bool PointInRect(int pointX, int pointY, Rectangle rect)
+		{
+			return pointX >= rect.X && pointX < rect.X + rect.Width && pointY >= rect.Y && pointY < rect.Y + rect.Height;
+		}
+
+		public static bool PointInRect(Vector2 point, Rectangle rect)
+		{
+			return point.X >= rect.X && point.X < rect.X + rect.Width && point.Y >= rect.Y && point.Y < rect.Y + rect.Height;
+		}
+
+		public static bool RectsCollide(Rectangle a, Rectangle b)
+		{
+			if (a.IsEmpty || b.IsEmpty) return false;
+			return !(a.Left >= b.Right || a.Right <= b.Left ||
+					 a.Bottom <= b.Top || a.Top >= b.Bottom);
+		}
+
+		public static bool RectsOverlap(Rectangle a, Rectangle b)
+		{
+			double dx = Math.Abs(b.Center.X - a.Center.X) - (a.Width / 2 + b.Width / 2);
+			double dy = Math.Abs(b.Center.Y - a.Center.Y) - (a.Height / 2 + b.Height / 2);
+			return dx < 0.0 && dy < 0.0;
+		}
+
+		public static Vector2 ClosestPointToRect(Vector2 vec, Rectangle rect)
+		{
+			return vec.ClampBetween(new Vector2(rect.X, rect.Y), new Vector2(rect.X + rect.Width, rect.Y + rect.Height));
 		}
 	}
 }

@@ -70,5 +70,22 @@ namespace AtarashiiMono.Framework.XNA.Extensions
 		{
 			return new Vector2((float)(self.X + xChange), (float)(self.Y + yChange));
 		}
+
+		public static Vector2 ClampBetween(this Vector2 self, Vector2 min, Vector2 max)
+		{
+			Vector2 vec = self.Clone(); // ヴェクターをクローンする
+
+			if (self.X < min.X)
+				vec.X = min.X;
+			else if (self.X > max.X)
+				vec.X = max.X;
+
+			if (self.Y < min.Y)
+				vec.Y = min.Y;
+			else if (self.Y > max.Y)
+				vec.Y = max.Y;
+
+			return vec;
+		}
 	}
 }
