@@ -17,6 +17,8 @@ namespace AtarashiiMono.Framework.XNA
 		
 		public AmSpriteBatch Graphics => gameBase.spriteBatch;
 
+		public AmScreenManager ScreenManager => gameBase.ScreenManager;
+
 		public void Run()
 		{
 			gameBase = new AmGameBase();
@@ -55,6 +57,7 @@ namespace AtarashiiMono.Framework.XNA
 			gameBase.Exit();
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public void Dispose()
 		{
 			gameBase.Dispose();

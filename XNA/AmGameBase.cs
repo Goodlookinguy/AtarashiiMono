@@ -15,14 +15,16 @@ namespace AtarashiiMono.Framework.XNA
 		public AmGame game;
 		public GraphicsDeviceManager graphics;
 		public AmSpriteBatch spriteBatch;
-		
-		
+
+		public AmScreenManager ScreenManager { get; } = null;
+
 		public AmGameBase()
 		{
 			Instance = this;
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 			IsMouseVisible = true;
+			ScreenManager = new AmScreenManager();
 		}
 
 		/// <summary>
@@ -71,6 +73,7 @@ namespace AtarashiiMono.Framework.XNA
 			
 			game.Update(gameTime);
 			base.Update(gameTime);
+			ScreenManager.Update(gameTime);
 		}
 
 		/// <summary>
@@ -81,10 +84,11 @@ namespace AtarashiiMono.Framework.XNA
 		{
 			GraphicsDevice.Clear(Color.Black);
 			// https://docs.microsoft.com/en-us/previous-versions/windows/xna/bb199041%28v%3dxnagamestudio.41%29
-			spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, null);
+			spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
 
 			// TODO: Add your drawing code here
 			game.Draw(gameTime);
+			ScreenManager.Draw(gameTime, spriteBatch);
 			
 			spriteBatch.End();
 			base.Draw(gameTime);
